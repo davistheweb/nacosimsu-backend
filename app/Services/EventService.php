@@ -31,21 +31,20 @@ class EventService
     public function uploadImage($request): ?string
     {
         if (!$request->hasFile('image')) {
-            dd(
-                'No file',
-                $request->all(),
-                $request->files->all()
-            );
+            return null;
         }
 
-        dd(
-            'File received',
-            $request->file('image')
-        );
-
-        return $request
+        $path = $request
             ->file('image')
             ->store('events', 'public');
+
+        dd([
+            'stored_path' => $path,
+            'exists' => Storage::disk('public')->exists($path),
+            'absolute_path' => Storage::disk('public')->path($path),
+        ]);
+
+        return $path;
     }
 
     public function replaceImage(Event $event, $request): ?string
