@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => env('CORS_ALLOWED_ORIGINS', ['*']),
+    'allowed_origins' => json_decode(env('CORS_ALLOWED_ORIGINS', '["*"]'), true),
 
     'allowed_origins_patterns' => [],
 
