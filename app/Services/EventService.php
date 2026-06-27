@@ -31,8 +31,17 @@ class EventService
     public function uploadImage($request): ?string
     {
         if (!$request->hasFile('image')) {
-            return null;
+            dd(
+                'No file',
+                $request->all(),
+                $request->files->all()
+            );
         }
+
+        dd(
+            'File received',
+            $request->file('image')
+        );
 
         return $request
             ->file('image')
