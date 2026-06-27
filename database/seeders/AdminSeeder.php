@@ -9,7 +9,10 @@ class AdminSeeder extends Seeder
 {
     public function run(): void
     {
-        $admins = json_decode(env('ADMIN_USERS', '[]'), true);
+        $admins = json_decode(
+            base64_decode(env('ADMIN_USERS', '')),
+            true
+        );
 
         foreach ($admins as $admin) {
             User::updateOrCreate(
