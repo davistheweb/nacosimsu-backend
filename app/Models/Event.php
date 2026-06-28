@@ -31,12 +31,12 @@ class Event extends Model
     
 
 
- public function getImageUrlAttribute(): ?string
-{
-    return $this->image
-        ? rtrim(config('app.url'), '/') . '/storage/' . ltrim($this->image, '/')
-        : null;
-}
+    public function getImageUrlAttribute(): ?string
+    {
+        return $this->image
+            ? asset('storage/' . $this->image)
+            : null;
+    }
 
     public function getGoingAttribute(): int
     {

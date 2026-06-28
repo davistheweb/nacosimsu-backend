@@ -34,17 +34,9 @@ class EventService
             return null;
         }
 
-        $path = $request->file('image')->store('events', 'public');
-
-        dd([
-            'stored' => $path,
-            'storage_path' => storage_path('app/public/events'),
-            'real_storage' => realpath(storage_path('app/public')),
-            'public_storage' => public_path('storage'),
-            'public_storage_realpath' => realpath(public_path('storage')),
-            'exists' => Storage::disk('public')->exists($path),
-            'files' => Storage::disk('public')->files('events'),
-        ]);
+        return $request
+            ->file('image')
+            ->store('events', 'public');
     }
 
     public function replaceImage(Event $event, $request): ?string
