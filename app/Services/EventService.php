@@ -34,17 +34,17 @@ class EventService
             return null;
         }
 
-        $path = $request
-            ->file('image')
-            ->store('events', 'public');
+        $path = $request->file('image')->store('events', 'public');
 
         dd([
-            'stored_path' => $path,
+            'stored' => $path,
+            'storage_path' => storage_path('app/public/events'),
+            'real_storage' => realpath(storage_path('app/public')),
+            'public_storage' => public_path('storage'),
+            'public_storage_realpath' => realpath(public_path('storage')),
             'exists' => Storage::disk('public')->exists($path),
-            'absolute_path' => Storage::disk('public')->path($path),
+            'files' => Storage::disk('public')->files('events'),
         ]);
-
-        return $path;
     }
 
     public function replaceImage(Event $event, $request): ?string
