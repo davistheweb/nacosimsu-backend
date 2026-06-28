@@ -14,6 +14,16 @@ Route::get('/where-am-i', function () {
     ];
 });
 
+Route::get('/debug-storage', function () {
+    return [
+        'base_path' => base_path(),
+        'cwd' => getcwd(),
+        'storage_path' => storage_path(),
+        'public_path' => public_path(),
+        'files' => Storage::disk('public')->allFiles(),
+    ];
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
