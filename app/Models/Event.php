@@ -28,14 +28,16 @@ class Event extends Model
         'going'
     ];
 
-    
+
 
 
     public function getImageUrlAttribute(): ?string
     {
-        return $this->image
-            ? asset('storage/' . $this->image)
-            : null;
+        if (!$this->image) {
+            return null;
+        }
+
+        return config('app.url') . '/storage/' . ltrim($this->image, '/');
     }
 
     public function getGoingAttribute(): int
