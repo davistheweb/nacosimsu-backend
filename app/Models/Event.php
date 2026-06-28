@@ -23,6 +23,11 @@ class Event extends Model
         'created_by',
     ];
 
+    protected $hidden = [
+        'image',
+        'image_key',
+        'image_id',
+    ];
     protected $appends = [
         'image_url',
         'going'
@@ -31,15 +36,18 @@ class Event extends Model
 
 
 
+    // public function getImageUrlAttribute(): ?string
+    // {
+    //     if (!$this->image) {
+    //         return null;
+    //     }
+
+    //     return config('app.url') . '/storage/' . ltrim($this->image, '/');
+    // }
     public function getImageUrlAttribute(): ?string
     {
-        if (!$this->image) {
-            return null;
-        }
-
-        return config('app.url') . '/storage/' . ltrim($this->image, '/');
+        return $this->image;
     }
-
     public function getGoingAttribute(): int
     {
         return $this->registrations_count

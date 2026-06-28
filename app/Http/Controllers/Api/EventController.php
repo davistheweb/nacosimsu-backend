@@ -27,6 +27,8 @@ class EventController extends Controller
     {
         $validated = $request->validated();
 
+        $image = $this->eventService->uploadImage($request);
+
         $event = Event::create([
 
             ...$validated,
@@ -36,8 +38,13 @@ class EventController extends Controller
                     $validated['name']
                 ),
 
-            'image' => $this->eventService
-                ->uploadImage($request),
+            // 'image' => $this->eventService
+            //     ->uploadImage($request),
+
+
+            'image' => $image['url'],
+            'image_key' => $image['key'],
+            'image_id' => $image['id'],
 
            'status' => $validated['status'] ?? 'draft',
 

@@ -20,6 +20,10 @@ return new class extends Migration
 
             $table->string('image')->nullable();
 
+            $table->string('image_key')->nullable();
+
+            $table->string('image_id')->nullable();
+
             $table->string('location');
 
             $table->date('date');

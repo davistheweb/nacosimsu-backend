@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'pxxl' => [
+        'api_key' => env('PXXL_API_KEY'),
+        'cdn_endpoint' => env(
+            'PXXL_CDN_ENDPOINT',
+            'https://gateway.pxxl.app/api/v3/cdn/assets'
+        ),
+    ],
+
 ];
