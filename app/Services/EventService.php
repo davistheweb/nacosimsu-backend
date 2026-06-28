@@ -28,15 +28,31 @@ class EventService
         return $slug;
     }
 
+    // public function uploadImage($request): ?string
+    // {
+    //     if (!$request->hasFile('image')) {
+    //         return null;
+    //     }
+
+    //     return $request
+    //         ->file('image')
+    //         ->store('events', 'public');
+    // }
+
     public function uploadImage($request): ?string
     {
         if (!$request->hasFile('image')) {
             return null;
         }
 
-        return $request
-            ->file('image')
-            ->store('events', 'public');
+        $path = $request->file('image')->store('events', 'public');
+
+        return dd([
+            'disk' => config('filesystems.disks.public'),
+            'storage_exists' => Storage::disk('public')->exists($path),
+            'all_files' => Storage::disk('public')->allFiles(),
+            'events_files' => Storage::disk('public')->files('events'),
+        ]);
     }
 
     public function replaceImage(Event $event, $request): ?string
